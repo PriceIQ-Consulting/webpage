@@ -11,785 +11,157 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --ink: #0a0a0f;
-      --paper: #f5f3ee;
-      --cream: #ede9e0;
-      --accent: #c8a96e;
-      --accent-dark: #a8893e;
-      --mid: #6b6b72;
-      --light: #b8b5ad;
-      --white: #ffffff;
-      --rule: rgba(10,10,15,0.12);
-      --card-bg: #ffffff;
-      --section-alt: #f0ede6;
+      --ink: #0a0a0f; --paper: #f5f3ee; --cream: #ede9e0; --accent: #c8a96e;
+      --accent-dark: #a8893e; --mid: #6b6b72; --light: #b8b5ad; --white: #ffffff;
+      --rule: rgba(10,10,15,0.12); --card-bg: #ffffff; --section-alt: #f0ede6;
     }
-
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     html { scroll-behavior: smooth; font-size: 16px; }
-
-    body {
-      font-family: 'DM Sans', sans-serif;
-      background: var(--paper);
-      color: var(--ink);
-      overflow-x: hidden;
-    }
-
-    /* ── LANG SWITCHER ── */
-    .lang-bar {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 1000;
-      background: var(--ink);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0 2rem;
-      height: 44px;
-    }
-    .lang-bar .brand-mini {
-      font-family: 'Playfair Display', serif;
-      color: var(--accent);
-      font-size: .85rem;
-      letter-spacing: .08em;
-    }
-    .lang-toggle {
-      display: flex;
-      gap: .25rem;
-      background: rgba(255,255,255,.08);
-      border-radius: 4px;
-      padding: 3px;
-    }
-    .lang-btn {
-      background: none;
-      border: none;
-      color: var(--light);
-      font-family: 'DM Sans', sans-serif;
-      font-size: .78rem;
-      font-weight: 600;
-      letter-spacing: .12em;
-      padding: 4px 12px;
-      cursor: pointer;
-      border-radius: 3px;
-      transition: all .2s;
-    }
-    .lang-btn.active {
-      background: var(--accent);
-      color: var(--ink);
-    }
-
-    /* ── NAV ── */
-    nav {
-      position: fixed;
-      top: 44px; left: 0; right: 0;
-      z-index: 999;
-      background: rgba(245,243,238,.96);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--rule);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0 2.5rem;
-      height: 60px;
-    }
-    .nav-logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.35rem;
-      font-weight: 900;
-      color: var(--ink);
-      letter-spacing: -.01em;
-    }
+    body { font-family: 'DM Sans', sans-serif; background: var(--paper); color: var(--ink); overflow-x: hidden; }
+    .lang-bar { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: var(--ink); display: flex; justify-content: space-between; align-items: center; padding: 0 2rem; height: 44px; }
+    .lang-bar .brand-mini { font-family: 'Playfair Display', serif; color: var(--accent); font-size: .85rem; letter-spacing: .08em; }
+    .lang-toggle { display: flex; gap: .25rem; background: rgba(255,255,255,.08); border-radius: 4px; padding: 3px; }
+    .lang-btn { background: none; border: none; color: var(--light); font-family: 'DM Sans', sans-serif; font-size: .78rem; font-weight: 600; letter-spacing: .12em; padding: 4px 12px; cursor: pointer; border-radius: 3px; transition: all .2s; }
+    .lang-btn.active { background: var(--accent); color: var(--ink); }
+    nav { position: fixed; top: 44px; left: 0; right: 0; z-index: 999; background: rgba(245,243,238,.96); backdrop-filter: blur(12px); border-bottom: 1px solid var(--rule); display: flex; justify-content: space-between; align-items: center; padding: 0 2.5rem; height: 60px; }
+    .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.35rem; font-weight: 900; color: var(--ink); letter-spacing: -.01em; }
     .nav-logo span { color: var(--accent); }
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-      list-style: none;
-    }
-    .nav-links a {
-      font-size: .82rem;
-      font-weight: 500;
-      letter-spacing: .06em;
-      text-transform: uppercase;
-      color: var(--mid);
-      text-decoration: none;
-      transition: color .2s;
-    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { font-size: .82rem; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; color: var(--mid); text-decoration: none; transition: color .2s; }
     .nav-links a:hover { color: var(--ink); }
-    .nav-cta {
-      background: var(--ink);
-      color: var(--paper) !important;
-      padding: 9px 20px;
-      border-radius: 3px;
-      font-weight: 600 !important;
-      transition: background .2s !important;
-    }
+    .nav-cta { background: var(--ink); color: var(--paper) !important; padding: 9px 20px; border-radius: 3px; font-weight: 600 !important; transition: background .2s !important; }
     .nav-cta:hover { background: var(--accent-dark) !important; color: var(--white) !important; }
     .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
     .hamburger span { width: 22px; height: 2px; background: var(--ink); display: block; transition: all .3s; }
-
-    /* ── SECTIONS ── */
     section { padding: 7rem 2.5rem; }
     .container { max-width: 1120px; margin: 0 auto; }
-
-    /* ── HERO ── */
-    #hero {
-      min-height: 100vh;
-      padding-top: calc(44px + 60px + 5rem);
-      padding-bottom: 5rem;
-      display: flex;
-      align-items: center;
-      background: var(--ink);
-      position: relative;
-      overflow: hidden;
-    }
-    #hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 60% 50% at 80% 30%, rgba(200,169,110,.15) 0%, transparent 70%),
-        radial-gradient(ellipse 40% 60% at 10% 80%, rgba(200,169,110,.08) 0%, transparent 60%);
-    }
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: center;
-      position: relative;
-      z-index: 1;
-    }
-    .hero-eyebrow {
-      display: inline-block;
-      font-size: .72rem;
-      font-weight: 600;
-      letter-spacing: .2em;
-      text-transform: uppercase;
-      color: var(--accent);
-      border: 1px solid rgba(200,169,110,.35);
-      padding: 6px 14px;
-      border-radius: 2px;
-      margin-bottom: 1.6rem;
-    }
-    #hero h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2.6rem, 5vw, 4.2rem);
-      font-weight: 900;
-      color: var(--paper);
-      line-height: 1.05;
-      letter-spacing: -.02em;
-      margin-bottom: 1.5rem;
-    }
-    #hero h1 em {
-      font-style: italic;
-      color: var(--accent);
-    }
-    .hero-sub {
-      font-size: 1.05rem;
-      font-weight: 300;
-      color: rgba(245,243,238,.65);
-      line-height: 1.7;
-      max-width: 480px;
-      margin-bottom: 2.5rem;
-    }
+    #hero { min-height: 100vh; padding-top: calc(44px + 60px + 5rem); padding-bottom: 5rem; display: flex; align-items: center; background: var(--ink); position: relative; overflow: hidden; }
+    #hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 50% at 80% 30%, rgba(200,169,110,.15) 0%, transparent 70%), radial-gradient(ellipse 40% 60% at 10% 80%, rgba(200,169,110,.08) 0%, transparent 60%); }
+    .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; position: relative; z-index: 1; }
+    .hero-eyebrow { display: inline-block; font-size: .72rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--accent); border: 1px solid rgba(200,169,110,.35); padding: 6px 14px; border-radius: 2px; margin-bottom: 1.6rem; }
+    #hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.6rem, 5vw, 4.2rem); font-weight: 900; color: var(--paper); line-height: 1.05; letter-spacing: -.02em; margin-bottom: 1.5rem; }
+    #hero h1 em { font-style: italic; color: var(--accent); }
+    .hero-sub { font-size: 1.05rem; font-weight: 300; color: rgba(245,243,238,.65); line-height: 1.7; max-width: 480px; margin-bottom: 2.5rem; }
     .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
-    .btn-primary {
-      background: var(--accent);
-      color: var(--ink);
-      font-family: 'DM Sans', sans-serif;
-      font-size: .88rem;
-      font-weight: 700;
-      letter-spacing: .06em;
-      text-transform: uppercase;
-      padding: 15px 28px;
-      border: none;
-      border-radius: 3px;
-      cursor: pointer;
-      text-decoration: none;
-      transition: background .2s, transform .15s;
-      display: inline-block;
-    }
+    .btn-primary { background: var(--accent); color: var(--ink); font-family: 'DM Sans', sans-serif; font-size: .88rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: 15px 28px; border: none; border-radius: 3px; cursor: pointer; text-decoration: none; transition: background .2s, transform .15s; display: inline-block; }
     .btn-primary:hover { background: var(--accent-dark); transform: translateY(-2px); }
-    .btn-ghost {
-      background: transparent;
-      color: var(--paper);
-      font-family: 'DM Sans', sans-serif;
-      font-size: .88rem;
-      font-weight: 500;
-      letter-spacing: .04em;
-      padding: 15px 28px;
-      border: 1px solid rgba(245,243,238,.3);
-      border-radius: 3px;
-      cursor: pointer;
-      text-decoration: none;
-      transition: border-color .2s, color .2s;
-      display: inline-block;
-    }
+    .btn-ghost { background: transparent; color: var(--paper); font-family: 'DM Sans', sans-serif; font-size: .88rem; font-weight: 500; letter-spacing: .04em; padding: 15px 28px; border: 1px solid rgba(245,243,238,.3); border-radius: 3px; cursor: pointer; text-decoration: none; transition: border-color .2s, color .2s; display: inline-block; }
     .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
-    .hero-stats {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-      padding-left: 2rem;
-      border-left: 1px solid rgba(200,169,110,.25);
-    }
+    .hero-stats { display: flex; flex-direction: column; gap: 1.5rem; padding-left: 2rem; border-left: 1px solid rgba(200,169,110,.25); }
     .hero-stat-item { display: flex; flex-direction: column; gap: .3rem; }
-    .stat-num {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.8rem;
-      font-weight: 900;
-      color: var(--accent);
-      line-height: 1;
-    }
-    .stat-label {
-      font-size: .78rem;
-      font-weight: 400;
-      color: rgba(245,243,238,.5);
-      letter-spacing: .06em;
-    }
-    .hero-divider {
-      width: 1px;
-      height: 40px;
-      background: rgba(200,169,110,.3);
-      margin: .5rem 0;
-      align-self: center;
-    }
-    .scroll-hint {
-      position: absolute;
-      bottom: 2.5rem;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: .5rem;
-      color: rgba(245,243,238,.35);
-      font-size: .7rem;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      animation: bounce 2.5s ease-in-out infinite;
-    }
+    .stat-num { font-family: 'Playfair Display', serif; font-size: 2.8rem; font-weight: 900; color: var(--accent); line-height: 1; }
+    .stat-label { font-size: .78rem; font-weight: 400; color: rgba(245,243,238,.5); letter-spacing: .06em; }
+    .hero-divider { width: 1px; height: 40px; background: rgba(200,169,110,.3); margin: .5rem 0; align-self: center; }
+    .scroll-hint { position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: .5rem; color: rgba(245,243,238,.35); font-size: .7rem; letter-spacing: .12em; text-transform: uppercase; animation: bounce 2.5s ease-in-out infinite; }
     .scroll-hint svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.5; }
-    @keyframes bounce {
-      0%, 100% { transform: translateX(-50%) translateY(0); }
-      50% { transform: translateX(-50%) translateY(8px); }
-    }
-
-    /* ── SECTION LABELS ── */
-    .section-label {
-      font-size: .72rem;
-      font-weight: 600;
-      letter-spacing: .2em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 1rem;
-      display: block;
-    }
-    .section-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-      font-weight: 900;
-      line-height: 1.1;
-      letter-spacing: -.02em;
-      color: var(--ink);
-      margin-bottom: 1.25rem;
-    }
+    @keyframes bounce { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(8px); } }
+    .section-label { font-size: .72rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; display: block; }
+    .section-title { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 900; line-height: 1.1; letter-spacing: -.02em; color: var(--ink); margin-bottom: 1.25rem; }
     .section-title em { font-style: italic; color: var(--accent); }
-    .section-body {
-      font-size: 1rem;
-      font-weight: 300;
-      color: var(--mid);
-      line-height: 1.75;
-      max-width: 620px;
-    }
-
-    /* ── PROBLEM ── */
+    .section-body { font-size: 1rem; font-weight: 300; color: var(--mid); line-height: 1.75; max-width: 620px; }
     #problem { background: var(--section-alt); }
-    .problem-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 5rem;
-      align-items: start;
-    }
+    .problem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
     .problem-questions { display: flex; flex-direction: column; gap: 1rem; margin-top: 2.5rem; }
-    .problem-q {
-      display: flex;
-      align-items: flex-start;
-      gap: 1rem;
-      padding: 1.25rem 1.5rem;
-      background: var(--white);
-      border-radius: 4px;
-      border-left: 3px solid var(--accent);
-      font-size: .95rem;
-      font-weight: 400;
-      color: var(--ink);
-      line-height: 1.5;
-      box-shadow: 0 2px 12px rgba(0,0,0,.04);
-    }
-    .problem-q-mark {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.8rem;
-      color: var(--accent);
-      line-height: 1;
-      flex-shrink: 0;
-    }
+    .problem-q { display: flex; align-items: flex-start; gap: 1rem; padding: 1.25rem 1.5rem; background: var(--white); border-radius: 4px; border-left: 3px solid var(--accent); font-size: .95rem; font-weight: 400; color: var(--ink); line-height: 1.5; box-shadow: 0 2px 12px rgba(0,0,0,.04); }
+    .problem-q-mark { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--accent); line-height: 1; flex-shrink: 0; }
     .problem-right { display: flex; flex-direction: column; gap: 1.5rem; padding-top: 1rem; }
-    .problem-card {
-      padding: 1.75rem;
-      background: var(--white);
-      border-radius: 4px;
-      box-shadow: 0 2px 16px rgba(0,0,0,.05);
-    }
-    .problem-card h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.1rem;
-      font-weight: 700;
-      margin-bottom: .5rem;
-      color: var(--ink);
-    }
-    .problem-card p {
-      font-size: .9rem;
-      color: var(--mid);
-      line-height: 1.6;
-    }
-    .cost-highlight {
-      margin-top: 2rem;
-      padding: 1.5rem 2rem;
-      background: var(--ink);
-      border-radius: 4px;
-      color: var(--paper);
-      font-size: 1rem;
-      line-height: 1.6;
-    }
+    .problem-card { padding: 1.75rem; background: var(--white); border-radius: 4px; box-shadow: 0 2px 16px rgba(0,0,0,.05); }
+    .problem-card h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; margin-bottom: .5rem; color: var(--ink); }
+    .problem-card p { font-size: .9rem; color: var(--mid); line-height: 1.6; }
+    .cost-highlight { margin-top: 2rem; padding: 1.5rem 2rem; background: var(--ink); border-radius: 4px; color: var(--paper); font-size: 1rem; line-height: 1.6; }
     .cost-highlight strong { color: var(--accent); }
-
-    /* ── SOLUTION ── */
     #solution { background: var(--paper); }
-    .solution-layout {
-      display: grid;
-      grid-template-columns: 5fr 4fr;
-      gap: 5rem;
-      align-items: center;
-    }
-    .definition-box {
-      margin: 2rem 0;
-      padding: 1.75rem 2rem;
-      border: 1px solid var(--rule);
-      border-radius: 4px;
-      background: var(--section-alt);
-      position: relative;
-    }
-    .definition-box::before {
-      content: '"';
-      position: absolute;
-      top: -.5rem;
-      left: 1.5rem;
-      font-family: 'Playfair Display', serif;
-      font-size: 3rem;
-      color: var(--accent);
-      line-height: 1;
-    }
-    .definition-box p {
-      font-size: .95rem;
-      font-weight: 400;
-      color: var(--ink);
-      line-height: 1.7;
-    }
+    .solution-layout { display: grid; grid-template-columns: 5fr 4fr; gap: 5rem; align-items: center; }
+    .definition-box { margin: 2rem 0; padding: 1.75rem 2rem; border: 1px solid var(--rule); border-radius: 4px; background: var(--section-alt); position: relative; }
+    .definition-box::before { content: '\201C'; position: absolute; top: -.5rem; left: 1.5rem; font-family: 'Playfair Display', serif; font-size: 3rem; color: var(--accent); line-height: 1; }
+    .definition-box p { font-size: .95rem; font-weight: 400; color: var(--ink); line-height: 1.7; }
     .solution-pillars { display: flex; flex-direction: column; gap: 1.25rem; }
-    .pillar {
-      display: flex;
-      gap: 1rem;
-      align-items: flex-start;
-      padding: 1.25rem;
-      background: var(--white);
-      border-radius: 4px;
-      box-shadow: 0 2px 10px rgba(0,0,0,.04);
-    }
-    .pillar-icon {
-      width: 40px;
-      height: 40px;
-      background: rgba(200,169,110,.15);
-      border-radius: 3px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      font-size: 1.1rem;
-    }
-    .pillar-text h4 {
-      font-size: .9rem;
-      font-weight: 600;
-      color: var(--ink);
-      margin-bottom: .25rem;
-    }
-    .pillar-text p {
-      font-size: .83rem;
-      color: var(--mid);
-      line-height: 1.5;
-    }
-
-    /* ── SERVICES ── */
+    .pillar { display: flex; gap: 1rem; align-items: flex-start; padding: 1.25rem; background: var(--white); border-radius: 4px; box-shadow: 0 2px 10px rgba(0,0,0,.04); }
+    .pillar-icon { width: 40px; height: 40px; background: rgba(200,169,110,.15); border-radius: 3px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 1.1rem; }
+    .pillar-text h4 { font-size: .9rem; font-weight: 600; color: var(--ink); margin-bottom: .25rem; }
+    .pillar-text p { font-size: .83rem; color: var(--mid); line-height: 1.5; }
     #services { background: var(--ink); }
     #services .section-title { color: var(--paper); }
     #services .section-body { color: rgba(245,243,238,.55); }
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(3,1fr);
-      gap: 1.5px;
-      margin-top: 3.5rem;
-      background: rgba(255,255,255,.06);
-      border: 1px solid rgba(255,255,255,.06);
-      border-radius: 6px;
-      overflow: hidden;
-    }
-    .service-card {
-      background: rgba(255,255,255,.035);
-      padding: 2.5rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1.25rem;
-      transition: background .25s;
-    }
+    .services-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5px; margin-top: 3.5rem; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.06); border-radius: 6px; overflow: hidden; }
+    .service-card { background: rgba(255,255,255,.035); padding: 2.5rem; display: flex; flex-direction: column; gap: 1.25rem; transition: background .25s; }
     .service-card:hover { background: rgba(200,169,110,.08); }
-    .service-num {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.5rem;
-      font-weight: 900;
-      color: rgba(200,169,110,.25);
-      line-height: 1;
-    }
-    .service-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: var(--paper);
-      line-height: 1.2;
-    }
-    .service-desc {
-      font-size: .88rem;
-      font-weight: 300;
-      color: rgba(245,243,238,.55);
-      line-height: 1.65;
-    }
+    .service-num { font-family: 'Playfair Display', serif; font-size: 2.5rem; font-weight: 900; color: rgba(200,169,110,.25); line-height: 1; }
+    .service-title { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; color: var(--paper); line-height: 1.2; }
+    .service-desc { font-size: .88rem; font-weight: 300; color: rgba(245,243,238,.55); line-height: 1.65; }
     .service-tags { display: flex; flex-wrap: wrap; gap: .5rem; }
-    .tag {
-      font-size: .7rem;
-      font-weight: 500;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      padding: 4px 10px;
-      background: rgba(200,169,110,.12);
-      color: var(--accent);
-      border-radius: 2px;
-      border: 1px solid rgba(200,169,110,.2);
-    }
-    .service-impact {
-      margin-top: auto;
-      padding-top: 1.25rem;
-      border-top: 1px solid rgba(255,255,255,.07);
-      font-size: .82rem;
-      color: rgba(245,243,238,.45);
-      line-height: 1.5;
-    }
+    .tag { font-size: .7rem; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; padding: 4px 10px; background: rgba(200,169,110,.12); color: var(--accent); border-radius: 2px; border: 1px solid rgba(200,169,110,.2); }
+    .service-impact { margin-top: auto; padding-top: 1.25rem; border-top: 1px solid rgba(255,255,255,.07); font-size: .82rem; color: rgba(245,243,238,.45); line-height: 1.5; }
     .service-impact strong { color: var(--accent); }
-
-    /* ── RESULTS ── */
     #results { background: var(--paper); }
-    .results-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1.5rem;
-      margin: 3.5rem 0;
-    }
-    .result-card {
-      padding: 2rem 1.5rem;
-      background: var(--white);
-      border-radius: 4px;
-      box-shadow: 0 2px 20px rgba(0,0,0,.06);
-      text-align: center;
-      border-top: 3px solid var(--accent);
-    }
-    .result-num {
-      font-family: 'Playfair Display', serif;
-      font-size: 3rem;
-      font-weight: 900;
-      color: var(--ink);
-      line-height: 1;
-      letter-spacing: -.03em;
-    }
-    .result-unit {
-      font-size: 1.2rem;
-      color: var(--accent);
-      font-weight: 700;
-    }
-    .result-label {
-      font-size: .82rem;
-      font-weight: 400;
-      color: var(--mid);
-      margin-top: .5rem;
-      line-height: 1.45;
-    }
-    .results-note {
-      font-size: .83rem;
-      color: var(--light);
-      text-align: center;
-      font-style: italic;
-    }
-
-    /* ── DIFFERENTIATORS ── */
+    .results-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin: 3.5rem 0; }
+    .result-card { padding: 2rem 1.5rem; background: var(--white); border-radius: 4px; box-shadow: 0 2px 20px rgba(0,0,0,.06); text-align: center; border-top: 3px solid var(--accent); }
+    .result-num { font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 900; color: var(--ink); line-height: 1; letter-spacing: -.03em; }
+    .result-unit { font-size: 1.2rem; color: var(--accent); font-weight: 700; }
+    .result-label { font-size: .82rem; font-weight: 400; color: var(--mid); margin-top: .5rem; line-height: 1.45; }
+    .results-note { font-size: .83rem; color: var(--light); text-align: center; font-style: italic; }
     #diff { background: var(--section-alt); }
-    .diff-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
-      margin-top: 3rem;
-    }
-    .diff-item {
-      padding: 2rem;
-      background: var(--white);
-      border-radius: 4px;
-      box-shadow: 0 2px 12px rgba(0,0,0,.04);
-      display: flex;
-      gap: 1.25rem;
-      align-items: flex-start;
-    }
-    .diff-icon-wrap {
-      width: 48px;
-      height: 48px;
-      background: var(--ink);
-      border-radius: 3px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      font-size: 1.2rem;
-    }
-    .diff-text h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--ink);
-      margin-bottom: .4rem;
-    }
-    .diff-text p {
-      font-size: .87rem;
-      color: var(--mid);
-      line-height: 1.6;
-    }
-
-    /* ── CASE STUDY ── */
+    .diff-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 3rem; }
+    .diff-item { padding: 2rem; background: var(--white); border-radius: 4px; box-shadow: 0 2px 12px rgba(0,0,0,.04); display: flex; gap: 1.25rem; align-items: flex-start; }
+    .diff-icon-wrap { width: 48px; height: 48px; background: var(--ink); border-radius: 3px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 1.2rem; }
+    .diff-text h3 { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; color: var(--ink); margin-bottom: .4rem; }
+    .diff-text p { font-size: .87rem; color: var(--mid); line-height: 1.6; }
     #case { background: var(--paper); }
-    .case-card {
-      background: var(--ink);
-      border-radius: 6px;
-      overflow: hidden;
-      display: grid;
-      grid-template-columns: repeat(3,1fr);
-    }
-    .case-col {
-      padding: 2.5rem;
-      border-right: 1px solid rgba(255,255,255,.08);
-    }
+    .case-card { background: var(--ink); border-radius: 6px; overflow: hidden; display: grid; grid-template-columns: repeat(3,1fr); }
+    .case-col { padding: 2.5rem; border-right: 1px solid rgba(255,255,255,.08); }
     .case-col:last-child { border-right: none; }
-    .case-step {
-      font-size: .7rem;
-      font-weight: 700;
-      letter-spacing: .18em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: .75rem;
-      display: block;
-    }
-    .case-col h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: var(--paper);
-      margin-bottom: .85rem;
-    }
-    .case-col p {
-      font-size: .87rem;
-      font-weight: 300;
-      color: rgba(245,243,238,.55);
-      line-height: 1.65;
-    }
-    .case-result-num {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.5rem;
-      font-weight: 900;
-      color: var(--accent);
-      line-height: 1;
-      margin-bottom: .25rem;
-    }
-
-    /* ── FAQ ── */
+    .case-step { font-size: .7rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--accent); margin-bottom: .75rem; display: block; }
+    .case-col h3 { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 700; color: var(--paper); margin-bottom: .85rem; }
+    .case-col p { font-size: .87rem; font-weight: 300; color: rgba(245,243,238,.55); line-height: 1.65; }
+    .case-result-num { font-family: 'Playfair Display', serif; font-size: 2.5rem; font-weight: 900; color: var(--accent); line-height: 1; margin-bottom: .25rem; }
     #faq { background: var(--section-alt); }
-    .faq-layout {
-      display: grid;
-      grid-template-columns: 2fr 3fr;
-      gap: 5rem;
-      align-items: start;
-    }
+    .faq-layout { display: grid; grid-template-columns: 2fr 3fr; gap: 5rem; align-items: start; }
     .faq-list { display: flex; flex-direction: column; }
-    .faq-item {
-      border-bottom: 1px solid var(--rule);
-    }
-    .faq-question {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 1rem;
-      padding: 1.4rem 0;
-      cursor: pointer;
-      font-size: .97rem;
-      font-weight: 500;
-      color: var(--ink);
-      list-style: none;
-      user-select: none;
-    }
+    .faq-item { border-bottom: 1px solid var(--rule); }
+    .faq-question { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 1.4rem 0; cursor: pointer; font-size: .97rem; font-weight: 500; color: var(--ink); list-style: none; user-select: none; }
     .faq-question::-webkit-details-marker { display: none; }
-    .faq-chevron {
-      width: 20px;
-      height: 20px;
-      flex-shrink: 0;
-      transition: transform .3s;
-      color: var(--accent);
-    }
+    .faq-chevron { width: 20px; height: 20px; flex-shrink: 0; transition: transform .3s; color: var(--accent); }
     details[open] .faq-chevron { transform: rotate(180deg); }
-    .faq-answer {
-      font-size: .9rem;
-      font-weight: 300;
-      color: var(--mid);
-      line-height: 1.7;
-      padding-bottom: 1.4rem;
-      max-width: 620px;
-    }
-
-    /* ── FINAL CTA ── */
-    #final-cta {
-      background: var(--ink);
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-    #final-cta::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(200,169,110,.12) 0%, transparent 70%);
-    }
+    .faq-answer { font-size: .9rem; font-weight: 300; color: var(--mid); line-height: 1.7; padding-bottom: 1.4rem; max-width: 620px; }
+    #final-cta { background: var(--ink); text-align: center; position: relative; overflow: hidden; }
+    #final-cta::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(200,169,110,.12) 0%, transparent 70%); }
     #final-cta .section-label { justify-content: center; display: flex; }
-    #final-cta .section-title {
-      color: var(--paper);
-      text-align: center;
-      max-width: 680px;
-      margin: 0 auto 1.25rem;
-    }
-    .cta-sub {
-      font-size: 1rem;
-      font-weight: 300;
-      color: rgba(245,243,238,.5);
-      max-width: 480px;
-      margin: 0 auto 2.5rem;
-      line-height: 1.7;
-    }
+    #final-cta .section-title { color: var(--paper); text-align: center; max-width: 680px; margin: 0 auto 1.25rem; }
+    .cta-sub { font-size: 1rem; font-weight: 300; color: rgba(245,243,238,.5); max-width: 480px; margin: 0 auto 2.5rem; line-height: 1.7; }
     .cta-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
-    .cta-note {
-      margin-top: 1.25rem;
-      font-size: .78rem;
-      color: rgba(245,243,238,.3);
-      letter-spacing: .04em;
-    }
-
-    /* ── FOOTER ── */
-    footer {
-      background: #050508;
-      padding: 2.5rem 2.5rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-top: 1px solid rgba(255,255,255,.04);
-    }
-    .footer-brand {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.1rem;
-      font-weight: 900;
-      color: rgba(245,243,238,.35);
-    }
+    .cta-note { margin-top: 1.25rem; font-size: .78rem; color: rgba(245,243,238,.3); letter-spacing: .04em; }
+    footer { background: #050508; padding: 2.5rem 2.5rem; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,.04); }
+    .footer-brand { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 900; color: rgba(245,243,238,.35); }
     .footer-brand span { color: var(--accent); }
-    .footer-copy {
-      font-size: .75rem;
-      color: rgba(245,243,238,.2);
-    }
-
-    /* ── UTILITY ── */
-    .mt-4 { margin-top: 1rem; }
-    .mt-8 { margin-top: 2rem; }
-    .text-center { text-align: center; }
+    .footer-copy { font-size: .75rem; color: rgba(245,243,238,.2); }
+    .mt-4 { margin-top: 1rem; } .mt-8 { margin-top: 2rem; } .text-center { text-align: center; }
     [data-lang] { display: none; }
-    .lang-es [data-lang="es"],
-    .lang-en [data-lang="en"] { display: block; }
-    .lang-es [data-lang-inline="es"],
-    .lang-en [data-lang-inline="en"] { display: inline; }
+    .lang-es [data-lang="es"], .lang-en [data-lang="en"] { display: block; }
+    .lang-es [data-lang-inline="es"], .lang-en [data-lang-inline="en"] { display: inline; }
     [data-lang-inline] { display: none; }
-
-    /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
-      nav { padding: 0 1.5rem; }
-      .nav-links { display: none; }
-      .hamburger { display: flex; }
-      .hero-grid, .problem-grid, .solution-layout, .diff-grid,
-      .faq-layout, .case-card { grid-template-columns: 1fr; }
-      .case-card { grid-template-columns: 1fr; }
+      nav { padding: 0 1.5rem; } .nav-links { display: none; } .hamburger { display: flex; }
+      .hero-grid, .problem-grid, .solution-layout, .diff-grid, .faq-layout, .case-card { grid-template-columns: 1fr; }
       .case-col { border-right: none; border-bottom: 1px solid rgba(255,255,255,.08); }
       .case-col:last-child { border-bottom: none; }
-      .services-grid { grid-template-columns: 1fr; }
-      .results-grid { grid-template-columns: repeat(2,1fr); }
+      .services-grid { grid-template-columns: 1fr; } .results-grid { grid-template-columns: repeat(2,1fr); }
       .hero-stats { border-left: none; padding-left: 0; flex-direction: row; flex-wrap: wrap; gap: 2rem; }
-      .hero-divider { display: none; }
-      section { padding: 5rem 1.5rem; }
+      .hero-divider { display: none; } section { padding: 5rem 1.5rem; }
     }
     @media (max-width: 520px) {
-      .results-grid { grid-template-columns: 1fr 1fr; }
-      .hero-actions { flex-direction: column; }
+      .results-grid { grid-template-columns: 1fr 1fr; } .hero-actions { flex-direction: column; }
       footer { flex-direction: column; gap: 1rem; text-align: center; }
     }
-
-    /* ── MOBILE NAV ── */
-    .mobile-nav {
-      display: none;
-      position: fixed;
-      top: calc(44px + 60px);
-      left: 0; right: 0;
-      background: var(--paper);
-      border-bottom: 1px solid var(--rule);
-      padding: 1.5rem;
-      flex-direction: column;
-      gap: 1.25rem;
-      z-index: 998;
-    }
+    .mobile-nav { display: none; position: fixed; top: calc(44px + 60px); left: 0; right: 0; background: var(--paper); border-bottom: 1px solid var(--rule); padding: 1.5rem; flex-direction: column; gap: 1.25rem; z-index: 998; }
     .mobile-nav.open { display: flex; }
-    .mobile-nav a {
-      font-size: .9rem;
-      font-weight: 500;
-      color: var(--ink);
-      text-decoration: none;
-      padding: .5rem 0;
-      border-bottom: 1px solid var(--rule);
-    }
+    .mobile-nav a { font-size: .9rem; font-weight: 500; color: var(--ink); text-decoration: none; padding: .5rem 0; border-bottom: 1px solid var(--rule); }
     .mobile-nav a:last-child { border-bottom: none; }
-
-    /* ── FADE IN ── */
-    .fade-in {
-      opacity: 0;
-      transform: translateY(22px);
-      transition: opacity .65s ease, transform .65s ease;
-    }
+    .fade-in { opacity: 0; transform: translateY(22px); transition: opacity .65s ease, transform .65s ease; }
     .fade-in.visible { opacity: 1; transform: translateY(0); }
   </style>
 </head>
 <body class="lang-es">
 
-<!-- LANG BAR -->
 <div class="lang-bar">
   <span class="brand-mini">PriceIQ Consulting</span>
   <div class="lang-toggle">
@@ -798,14 +170,13 @@
   </div>
 </div>
 
-<!-- NAV -->
 <nav>
   <div class="nav-logo">Price<span>IQ</span></div>
   <ul class="nav-links">
     <li><a href="#problem" data-lang-inline="es">Problema</a><a href="#problem" data-lang-inline="en">Problem</a></li>
     <li><a href="#services" data-lang-inline="es">Servicios</a><a href="#services" data-lang-inline="en">Services</a></li>
     <li><a href="#results" data-lang-inline="es">Resultados</a><a href="#results" data-lang-inline="en">Results</a></li>
-    <li><a href="#faq" data-lang-inline="es">FAQ</a><a href="#faq" data-lang-inline="en">FAQ</a></li>
+    <li><a href="#faq">FAQ</a></li>
     <li><a href="#final-cta" class="nav-cta" data-lang-inline="es">Hablar con un experto</a><a href="#final-cta" class="nav-cta" data-lang-inline="en">Talk to an Expert</a></li>
   </ul>
   <div class="hamburger" id="hamburger" onclick="toggleMobileNav()">
@@ -813,7 +184,6 @@
   </div>
 </nav>
 
-<!-- MOBILE NAV -->
 <div class="mobile-nav" id="mobile-nav">
   <a href="#problem" onclick="toggleMobileNav()"><span data-lang-inline="es">Problema</span><span data-lang-inline="en">Problem</span></a>
   <a href="#services" onclick="toggleMobileNav()"><span data-lang-inline="es">Servicios</span><span data-lang-inline="en">Services</span></a>
@@ -822,15 +192,10 @@
   <a href="#final-cta" onclick="toggleMobileNav()"><span data-lang-inline="es">Hablar con un experto</span><span data-lang-inline="en">Talk to an Expert</span></a>
 </div>
 
-<!-- ════════════════════════════════
-     HERO
-════════════════════════════════ -->
 <section id="hero">
   <div class="container">
     <div class="hero-grid">
       <div>
-
-        <!-- ES -->
         <div data-lang="es">
           <span class="hero-eyebrow">Revenue & Pricing Optimization</span>
           <h1>Aumenta tus ingresos con <em>estrategias de precios</em> basadas en datos</h1>
@@ -840,8 +205,6 @@
             <a href="#solution" class="btn-ghost">¿Cómo funciona?</a>
           </div>
         </div>
-
-        <!-- EN -->
         <div data-lang="en">
           <span class="hero-eyebrow">Revenue & Pricing Optimization</span>
           <h1>Grow your revenue with <em>data-driven pricing</em> strategies</h1>
@@ -851,9 +214,7 @@
             <a href="#solution" class="btn-ghost">How does it work?</a>
           </div>
         </div>
-
       </div>
-
       <div class="hero-stats">
         <div class="hero-stat-item">
           <span class="stat-num">+22%</span>
@@ -875,19 +236,13 @@
       </div>
     </div>
   </div>
-
   <div class="scroll-hint">
     <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
   </div>
 </section>
 
-<!-- ════════════════════════════════
-     PROBLEM
-════════════════════════════════ -->
 <section id="problem">
   <div class="container">
-
-    <!-- ES -->
     <div data-lang="es">
       <div class="problem-grid fade-in">
         <div>
@@ -895,45 +250,20 @@
           <h2 class="section-title">¿Tu empresa está dejando <em>dinero sobre la mesa</em>?</h2>
           <p class="section-body">La mayoría de las empresas fijan precios por intuición o por referencia a la competencia. Pocas utilizan datos reales de demanda para encontrar el precio óptimo. El resultado: ingresos menores de lo posible.</p>
           <div class="problem-questions">
-            <div class="problem-q">
-              <span class="problem-q-mark">?</span>
-              <span>¿Tus precios se basan en costos o en lo que percibe el mercado como valor real?</span>
-            </div>
-            <div class="problem-q">
-              <span class="problem-q-mark">?</span>
-              <span>¿Sabes exactamente cuánto afecta un 5% de aumento de precio a tu volumen de ventas?</span>
-            </div>
-            <div class="problem-q">
-              <span class="problem-q-mark">?</span>
-              <span>¿Tienes la misma estrategia de precios para todos tus segmentos de clientes?</span>
-            </div>
-            <div class="problem-q">
-              <span class="problem-q-mark">?</span>
-              <span>¿Tu equipo de pricing toma decisiones respaldadas por modelos de demanda reales?</span>
-            </div>
+            <div class="problem-q"><span class="problem-q-mark">?</span><span>¿Tus precios se basan en costos o en lo que percibe el mercado como valor real?</span></div>
+            <div class="problem-q"><span class="problem-q-mark">?</span><span>¿Sabes exactamente cuánto afecta un 5% de aumento de precio a tu volumen de ventas?</span></div>
+            <div class="problem-q"><span class="problem-q-mark">?</span><span>¿Tienes la misma estrategia de precios para todos tus segmentos de clientes?</span></div>
+            <div class="problem-q"><span class="problem-q-mark">?</span><span>¿Tu equipo de pricing toma decisiones respaldadas por modelos de demanda reales?</span></div>
           </div>
         </div>
         <div class="problem-right">
-          <div class="problem-card">
-            <h3>Precios por intuición</h3>
-            <p>Fijar precios sin datos de demanda es como navegar sin GPS. Se pierden oportunidades de captura de valor en cada segmento del mercado.</p>
-          </div>
-          <div class="problem-card">
-            <h3>Ingresos perdidos invisibles</h3>
-            <p>El valor no capturado no aparece en el P&L, pero existe. Empresas que optimizan su pricing recuperan entre un 10% y un 25% de ingresos adicionales sin cambiar sus productos.</p>
-          </div>
-          <div class="problem-card">
-            <h3>Sin comprensión de la demanda</h3>
-            <p>No modelar la elasticidad precio-demanda impide distinguir qué clientes pagarían más, en qué canales y en qué momento del ciclo.</p>
-          </div>
-          <div class="cost-highlight">
-            <strong>Regla del 1%:</strong> un incremento del 1% en precios, bien ejecutado, genera más impacto en el margen que un 10% de reducción de costos.
-          </div>
+          <div class="problem-card"><h3>Precios por intuición</h3><p>Fijar precios sin datos de demanda es como navegar sin GPS. Se pierden oportunidades de captura de valor en cada segmento del mercado.</p></div>
+          <div class="problem-card"><h3>Ingresos perdidos invisibles</h3><p>El valor no capturado no aparece en el P&amp;L, pero existe. Empresas que optimizan su pricing recuperan entre un 10% y un 25% de ingresos adicionales sin cambiar sus productos.</p></div>
+          <div class="problem-card"><h3>Sin comprensión de la demanda</h3><p>No modelar la elasticidad precio-demanda impide distinguir qué clientes pagarían más, en qué canales y en qué momento del ciclo.</p></div>
+          <div class="cost-highlight"><strong>Regla del 1%:</strong> un incremento del 1% en precios, bien ejecutado, genera más impacto en el margen que un 10% de reducción de costos.</div>
         </div>
       </div>
     </div>
-
-    <!-- EN -->
     <div data-lang="en">
       <div class="problem-grid fade-in">
         <div>
@@ -941,453 +271,168 @@
           <h2 class="section-title">Is your company leaving <em>money on the table</em>?</h2>
           <p class="section-body">Most companies set prices by intuition or by benchmarking competitors. Few use actual demand data to find the optimal price. The result: lower revenues than possible.</p>
           <div class="problem-questions">
-            <div class="problem-q">
-              <span class="problem-q-mark">?</span>
-              <span>Are your prices based on cost-plus rather than perceived market value?</span>
-            </div>
-            <div class="problem-q">
-              <span class="problem-q-mark">?</span>
-              <span>Do you know exactly how a 5% price increase affects your sales volume?</span>
-            </div>
-            <div class="problem-q">
-              <span class="problem-q-mark">?</span>
-              <span>Do you apply the same pricing strategy across all your customer segments?</span>
-            </div>
-            <div class="problem-q">
-              <span class="problem-q-mark">?</span>
-              <span>Does your pricing team make decisions backed by real demand models?</span>
-            </div>
+            <div class="problem-q"><span class="problem-q-mark">?</span><span>Are your prices based on cost-plus rather than perceived market value?</span></div>
+            <div class="problem-q"><span class="problem-q-mark">?</span><span>Do you know exactly how a 5% price increase affects your sales volume?</span></div>
+            <div class="problem-q"><span class="problem-q-mark">?</span><span>Do you apply the same pricing strategy across all your customer segments?</span></div>
+            <div class="problem-q"><span class="problem-q-mark">?</span><span>Does your pricing team make decisions backed by real demand models?</span></div>
           </div>
         </div>
         <div class="problem-right">
-          <div class="problem-card">
-            <h3>Intuition-based pricing</h3>
-            <p>Setting prices without demand data is like navigating without GPS. Value capture opportunities are missed across every market segment.</p>
-          </div>
-          <div class="problem-card">
-            <h3>Invisible lost revenue</h3>
-            <p>Uncaptured value doesn't appear in the P&L, but it exists. Companies that optimize their pricing recover between 10% and 25% in additional revenue without changing their products.</p>
-          </div>
-          <div class="problem-card">
-            <h3>No demand understanding</h3>
-            <p>Without price-demand elasticity modeling, it's impossible to identify which customers would pay more, in which channels, and at which point in the cycle.</p>
-          </div>
-          <div class="cost-highlight">
-            <strong>The 1% rule:</strong> a 1% price increase, well executed, generates more margin impact than a 10% cost reduction.
-          </div>
+          <div class="problem-card"><h3>Intuition-based pricing</h3><p>Setting prices without demand data is like navigating without GPS. Value capture opportunities are missed across every market segment.</p></div>
+          <div class="problem-card"><h3>Invisible lost revenue</h3><p>Uncaptured value doesn't appear in the P&amp;L, but it exists. Companies that optimize their pricing recover between 10% and 25% in additional revenue without changing their products.</p></div>
+          <div class="problem-card"><h3>No demand understanding</h3><p>Without price-demand elasticity modeling, it's impossible to identify which customers would pay more, in which channels, and at which point in the cycle.</p></div>
+          <div class="cost-highlight"><strong>The 1% rule:</strong> a 1% price increase, well executed, generates more margin impact than a 10% cost reduction.</div>
         </div>
       </div>
     </div>
-
   </div>
 </section>
 
-<!-- ════════════════════════════════
-     SOLUTION
-════════════════════════════════ -->
 <section id="solution">
   <div class="container">
-
-    <!-- ES -->
     <div data-lang="es">
       <div class="solution-layout fade-in">
         <div>
           <span class="section-label">Nuestra solución</span>
           <h2 class="section-title">Convertimos datos en <em>decisiones de precio</em> que incrementan ingresos</h2>
-          <div class="definition-box">
-            <p>La <strong>optimización de ingresos</strong> es el proceso de maximizar los ingresos totales de una empresa identificando el precio correcto, para el cliente correcto, en el momento correcto, utilizando modelos de demanda, segmentación y análisis de elasticidad.</p>
-          </div>
+          <div class="definition-box"><p>La <strong>optimización de ingresos</strong> es el proceso de maximizar los ingresos totales de una empresa identificando el precio correcto, para el cliente correcto, en el momento correcto, utilizando modelos de demanda, segmentación y análisis de elasticidad.</p></div>
           <p class="section-body">No vendemos software ni implementamos plataformas. Construimos la estrategia analítica que hace que tu pricing trabaje a favor de tus márgenes. Combinamos econometría, machine learning y conocimiento del negocio para generar impacto real y medible.</p>
         </div>
         <div class="solution-pillars">
-          <div class="pillar">
-            <div class="pillar-icon">📊</div>
-            <div class="pillar-text">
-              <h4>Decisiones basadas en datos</h4>
-              <p>Reemplazamos la intuición por modelos cuantitativos que responden: "¿qué precio maximiza el margen esperado?"</p>
-            </div>
-          </div>
-          <div class="pillar">
-            <div class="pillar-icon">📈</div>
-            <div class="pillar-text">
-              <h4>Modelado de demanda</h4>
-              <p>Construimos curvas de demanda y modelos de elasticidad específicos para cada producto, segmento y canal.</p>
-            </div>
-          </div>
-          <div class="pillar">
-            <div class="pillar-icon">🎯</div>
-            <div class="pillar-text">
-              <h4>Optimización de precios</h4>
-              <p>Encontramos el precio óptimo que maximiza el ingreso o el margen según el objetivo estratégico de cada empresa.</p>
-            </div>
-          </div>
-          <div class="pillar">
-            <div class="pillar-icon">🔁</div>
-            <div class="pillar-text">
-              <h4>Monitoreo y ajuste continuo</h4>
-              <p>Los mercados cambian. Construimos sistemas de seguimiento para que el pricing se adapte continuamente.</p>
-            </div>
-          </div>
+          <div class="pillar"><div class="pillar-icon">📊</div><div class="pillar-text"><h4>Decisiones basadas en datos</h4><p>Reemplazamos la intuición por modelos cuantitativos que responden: "¿qué precio maximiza el margen esperado?"</p></div></div>
+          <div class="pillar"><div class="pillar-icon">📈</div><div class="pillar-text"><h4>Modelado de demanda</h4><p>Construimos curvas de demanda y modelos de elasticidad específicos para cada producto, segmento y canal.</p></div></div>
+          <div class="pillar"><div class="pillar-icon">🎯</div><div class="pillar-text"><h4>Optimización de precios</h4><p>Encontramos el precio óptimo que maximiza el ingreso o el margen según el objetivo estratégico de cada empresa.</p></div></div>
+          <div class="pillar"><div class="pillar-icon">🔁</div><div class="pillar-text"><h4>Monitoreo y ajuste continuo</h4><p>Los mercados cambian. Construimos sistemas de seguimiento para que el pricing se adapte continuamente.</p></div></div>
         </div>
       </div>
     </div>
-
-    <!-- EN -->
     <div data-lang="en">
       <div class="solution-layout fade-in">
         <div>
           <span class="section-label">Our solution</span>
           <h2 class="section-title">We turn data into <em>pricing decisions</em> that grow revenue</h2>
-          <div class="definition-box">
-            <p><strong>Revenue optimization</strong> is the process of maximizing a company's total revenues by identifying the right price, for the right customer, at the right time — using demand models, segmentation, and elasticity analysis.</p>
-          </div>
+          <div class="definition-box"><p><strong>Revenue optimization</strong> is the process of maximizing a company's total revenues by identifying the right price, for the right customer, at the right time — using demand models, segmentation, and elasticity analysis.</p></div>
           <p class="section-body">We don't sell software or implement platforms. We build the analytical strategy that makes your pricing work for your margins. We combine econometrics, machine learning, and business knowledge to generate real, measurable impact.</p>
         </div>
         <div class="solution-pillars">
-          <div class="pillar">
-            <div class="pillar-icon">📊</div>
-            <div class="pillar-text">
-              <h4>Data-driven decisions</h4>
-              <p>We replace intuition with quantitative models that answer: "which price maximizes expected margin?"</p>
-            </div>
-          </div>
-          <div class="pillar">
-            <div class="pillar-icon">📈</div>
-            <div class="pillar-text">
-              <h4>Demand modeling</h4>
-              <p>We build demand curves and elasticity models specific to each product, segment, and channel.</p>
-            </div>
-          </div>
-          <div class="pillar">
-            <div class="pillar-icon">🎯</div>
-            <div class="pillar-text">
-              <h4>Pricing optimization</h4>
-              <p>We find the optimal price that maximizes revenue or margin according to each company's strategic objective.</p>
-            </div>
-          </div>
-          <div class="pillar">
-            <div class="pillar-icon">🔁</div>
-            <div class="pillar-text">
-              <h4>Continuous monitoring & adjustment</h4>
-              <p>Markets change. We build tracking systems so pricing continuously adapts to new conditions.</p>
-            </div>
-          </div>
+          <div class="pillar"><div class="pillar-icon">📊</div><div class="pillar-text"><h4>Data-driven decisions</h4><p>We replace intuition with quantitative models that answer: "which price maximizes expected margin?"</p></div></div>
+          <div class="pillar"><div class="pillar-icon">📈</div><div class="pillar-text"><h4>Demand modeling</h4><p>We build demand curves and elasticity models specific to each product, segment, and channel.</p></div></div>
+          <div class="pillar"><div class="pillar-icon">🎯</div><div class="pillar-text"><h4>Pricing optimization</h4><p>We find the optimal price that maximizes revenue or margin according to each company's strategic objective.</p></div></div>
+          <div class="pillar"><div class="pillar-icon">🔁</div><div class="pillar-text"><h4>Continuous monitoring &amp; adjustment</h4><p>Markets change. We build tracking systems so pricing continuously adapts to new conditions.</p></div></div>
         </div>
       </div>
     </div>
-
   </div>
 </section>
 
-<!-- ════════════════════════════════
-     SERVICES
-════════════════════════════════ -->
 <section id="services">
   <div class="container">
-
-    <!-- ES -->
     <div data-lang="es" class="fade-in">
       <span class="section-label">Servicios</span>
       <h2 class="section-title">Lo que hacemos</h2>
       <p class="section-body">Tres áreas de práctica diseñadas para cubrir el ciclo completo de la optimización de ingresos.</p>
       <div class="services-grid">
-        <div class="service-card">
-          <div class="service-num">01</div>
-          <div class="service-title">Optimización de Ingresos</div>
-          <p class="service-desc">Maximizamos los ingresos totales identificando oportunidades de captura de valor en toda la cartera de productos y segmentos de clientes. Alineamos precio, volumen y mix para generar el máximo ingreso sostenible.</p>
-          <div class="service-tags">
-            <span class="tag">Dynamic Pricing</span>
-            <span class="tag">Demand Forecasting</span>
-            <span class="tag">Segmentación</span>
-          </div>
-          <div class="service-impact"><strong>Impacto:</strong> Incremento de ingresos de entre el 10% y el 25% en los primeros 6 meses.</div>
-        </div>
-        <div class="service-card">
-          <div class="service-num">02</div>
-          <div class="service-title">Optimización de Precios</div>
-          <p class="service-desc">Determinamos el precio óptimo para cada producto, canal y segmento utilizando modelos econométricos de elasticidad y experimentación de precios. Encontramos el punto donde precio y demanda generan el mayor margen posible.</p>
-          <div class="service-tags">
-            <span class="tag">Elasticidad</span>
-            <span class="tag">Modelos de Precio</span>
-            <span class="tag">A/B Testing</span>
-          </div>
-          <div class="service-impact"><strong>Impacto:</strong> Mejora de margen bruto del 5% al 15% sin reducir volumen de ventas.</div>
-        </div>
-        <div class="service-card">
-          <div class="service-num">03</div>
-          <div class="service-title">Estrategia de Monetización</div>
-          <p class="service-desc">Diseñamos el modelo de negocio y la estructura de precios que mejor captura el valor percibido por los clientes. Desde modelos de suscripción hasta pricing por uso, alineamos la monetización con el comportamiento real del cliente.</p>
-          <div class="service-tags">
-            <span class="tag">Suscripciones</span>
-            <span class="tag">Pricing Structures</span>
-            <span class="tag">Segmentación</span>
-          </div>
-          <div class="service-impact"><strong>Impacto:</strong> Incremento del LTV y reducción del churn mediante modelos de precio más alineados al valor entregado.</div>
-        </div>
+        <div class="service-card"><div class="service-num">01</div><div class="service-title">Optimización de Ingresos</div><p class="service-desc">Maximizamos los ingresos totales identificando oportunidades de captura de valor en toda la cartera de productos y segmentos de clientes. Alineamos precio, volumen y mix para generar el máximo ingreso sostenible.</p><div class="service-tags"><span class="tag">Dynamic Pricing</span><span class="tag">Demand Forecasting</span><span class="tag">Segmentación</span></div><div class="service-impact"><strong>Impacto:</strong> Incremento de ingresos de entre el 10% y el 25% en los primeros 6 meses.</div></div>
+        <div class="service-card"><div class="service-num">02</div><div class="service-title">Optimización de Precios</div><p class="service-desc">Determinamos el precio óptimo para cada producto, canal y segmento utilizando modelos econométricos de elasticidad y experimentación de precios. Encontramos el punto donde precio y demanda generan el mayor margen posible.</p><div class="service-tags"><span class="tag">Elasticidad</span><span class="tag">Modelos de Precio</span><span class="tag">A/B Testing</span></div><div class="service-impact"><strong>Impacto:</strong> Mejora de margen bruto del 5% al 15% sin reducir volumen de ventas.</div></div>
+        <div class="service-card"><div class="service-num">03</div><div class="service-title">Estrategia de Monetización</div><p class="service-desc">Diseñamos el modelo de negocio y la estructura de precios que mejor captura el valor percibido por los clientes. Desde modelos de suscripción hasta pricing por uso, alineamos la monetización con el comportamiento real del cliente.</p><div class="service-tags"><span class="tag">Suscripciones</span><span class="tag">Pricing Structures</span><span class="tag">Segmentación</span></div><div class="service-impact"><strong>Impacto:</strong> Incremento del LTV y reducción del churn mediante modelos de precio más alineados al valor entregado.</div></div>
       </div>
     </div>
-
-    <!-- EN -->
     <div data-lang="en" class="fade-in">
       <span class="section-label">Services</span>
       <h2 class="section-title">What we do</h2>
       <p class="section-body">Three practice areas designed to cover the full cycle of revenue optimization.</p>
       <div class="services-grid">
-        <div class="service-card">
-          <div class="service-num">01</div>
-          <div class="service-title">Revenue Optimization</div>
-          <p class="service-desc">We maximize total revenues by identifying value capture opportunities across the entire product portfolio and customer segments. We align price, volume, and mix to generate the maximum sustainable revenue.</p>
-          <div class="service-tags">
-            <span class="tag">Dynamic Pricing</span>
-            <span class="tag">Demand Forecasting</span>
-            <span class="tag">Segmentation</span>
-          </div>
-          <div class="service-impact"><strong>Impact:</strong> Revenue increase of 10% to 25% within the first 6 months.</div>
-        </div>
-        <div class="service-card">
-          <div class="service-num">02</div>
-          <div class="service-title">Pricing Optimization</div>
-          <p class="service-desc">We determine the optimal price for each product, channel, and segment using econometric elasticity models and pricing experimentation. We find the point where price and demand generate the highest possible margin.</p>
-          <div class="service-tags">
-            <span class="tag">Elasticity</span>
-            <span class="tag">Pricing Models</span>
-            <span class="tag">A/B Testing</span>
-          </div>
-          <div class="service-impact"><strong>Impact:</strong> Gross margin improvement of 5% to 15% without reducing sales volume.</div>
-        </div>
-        <div class="service-card">
-          <div class="service-num">03</div>
-          <div class="service-title">Monetization Strategy</div>
-          <p class="service-desc">We design the business model and pricing structure that best captures the value perceived by customers. From subscription models to usage-based pricing, we align monetization with real customer behavior.</p>
-          <div class="service-tags">
-            <span class="tag">Subscriptions</span>
-            <span class="tag">Pricing Structures</span>
-            <span class="tag">Segmentation</span>
-          </div>
-          <div class="service-impact"><strong>Impact:</strong> Increased LTV and reduced churn through price models better aligned with delivered value.</div>
-        </div>
+        <div class="service-card"><div class="service-num">01</div><div class="service-title">Revenue Optimization</div><p class="service-desc">We maximize total revenues by identifying value capture opportunities across the entire product portfolio and customer segments. We align price, volume, and mix to generate the maximum sustainable revenue.</p><div class="service-tags"><span class="tag">Dynamic Pricing</span><span class="tag">Demand Forecasting</span><span class="tag">Segmentation</span></div><div class="service-impact"><strong>Impact:</strong> Revenue increase of 10% to 25% within the first 6 months.</div></div>
+        <div class="service-card"><div class="service-num">02</div><div class="service-title">Pricing Optimization</div><p class="service-desc">We determine the optimal price for each product, channel, and segment using econometric elasticity models and pricing experimentation. We find the point where price and demand generate the highest possible margin.</p><div class="service-tags"><span class="tag">Elasticity</span><span class="tag">Pricing Models</span><span class="tag">A/B Testing</span></div><div class="service-impact"><strong>Impact:</strong> Gross margin improvement of 5% to 15% without reducing sales volume.</div></div>
+        <div class="service-card"><div class="service-num">03</div><div class="service-title">Monetization Strategy</div><p class="service-desc">We design the business model and pricing structure that best captures the value perceived by customers. From subscription models to usage-based pricing, we align monetization with real customer behavior.</p><div class="service-tags"><span class="tag">Subscriptions</span><span class="tag">Pricing Structures</span><span class="tag">Segmentation</span></div><div class="service-impact"><strong>Impact:</strong> Increased LTV and reduced churn through price models better aligned with delivered value.</div></div>
       </div>
     </div>
-
   </div>
 </section>
 
-<!-- ════════════════════════════════
-     RESULTS
-════════════════════════════════ -->
 <section id="results">
   <div class="container">
-
-    <!-- ES -->
     <div data-lang="es" class="fade-in">
-      <div class="text-center" style="margin-bottom:1rem">
-        <span class="section-label" style="display:inline-block">Resultados</span>
-      </div>
+      <div class="text-center" style="margin-bottom:1rem"><span class="section-label" style="display:inline-block">Resultados</span></div>
       <h2 class="section-title text-center">Impacto medible en <em>números reales</em></h2>
       <div class="results-grid">
-        <div class="result-card">
-          <div><span class="result-num">+10</span><span class="result-unit">–25%</span></div>
-          <div class="result-label">Incremento en ingresos totales en los primeros 6 meses</div>
-        </div>
-        <div class="result-card">
-          <div><span class="result-num">+5</span><span class="result-unit">–15%</span></div>
-          <div class="result-label">Mejora en margen operativo sin cambiar el producto</div>
-        </div>
-        <div class="result-card">
-          <div><span class="result-num">3×</span><span class="result-unit"></span></div>
-          <div class="result-label">ROI promedio sobre la inversión en consulting en 12 meses</div>
-        </div>
-        <div class="result-card">
-          <div><span class="result-num">6</span><span class="result-unit">sem</span></div>
-          <div class="result-label">Tiempo promedio al primer resultado cuantificable</div>
-        </div>
+        <div class="result-card"><div><span class="result-num">+10</span><span class="result-unit">–25%</span></div><div class="result-label">Incremento en ingresos totales en los primeros 6 meses</div></div>
+        <div class="result-card"><div><span class="result-num">+5</span><span class="result-unit">–15%</span></div><div class="result-label">Mejora en margen operativo sin cambiar el producto</div></div>
+        <div class="result-card"><div><span class="result-num">3×</span><span class="result-unit"></span></div><div class="result-label">ROI promedio sobre la inversión en consulting en 12 meses</div></div>
+        <div class="result-card"><div><span class="result-num">6</span><span class="result-unit">sem</span></div><div class="result-label">Tiempo promedio al primer resultado cuantificable</div></div>
       </div>
       <p class="results-note">Resultados basados en proyectos referenciales. Los resultados individuales varían según industria, madurez de datos y punto de partida.</p>
     </div>
-
-    <!-- EN -->
     <div data-lang="en" class="fade-in">
-      <div class="text-center" style="margin-bottom:1rem">
-        <span class="section-label" style="display:inline-block">Results</span>
-      </div>
+      <div class="text-center" style="margin-bottom:1rem"><span class="section-label" style="display:inline-block">Results</span></div>
       <h2 class="section-title text-center">Measurable impact in <em>real numbers</em></h2>
       <div class="results-grid">
-        <div class="result-card">
-          <div><span class="result-num">+10</span><span class="result-unit">–25%</span></div>
-          <div class="result-label">Increase in total revenue within the first 6 months</div>
-        </div>
-        <div class="result-card">
-          <div><span class="result-num">+5</span><span class="result-unit">–15%</span></div>
-          <div class="result-label">Operating margin improvement without changing the product</div>
-        </div>
-        <div class="result-card">
-          <div><span class="result-num">3×</span><span class="result-unit"></span></div>
-          <div class="result-label">Average ROI on consulting investment over 12 months</div>
-        </div>
-        <div class="result-card">
-          <div><span class="result-num">6</span><span class="result-unit">wk</span></div>
-          <div class="result-label">Average time to the first quantifiable result</div>
-        </div>
+        <div class="result-card"><div><span class="result-num">+10</span><span class="result-unit">–25%</span></div><div class="result-label">Increase in total revenue within the first 6 months</div></div>
+        <div class="result-card"><div><span class="result-num">+5</span><span class="result-unit">–15%</span></div><div class="result-label">Operating margin improvement without changing the product</div></div>
+        <div class="result-card"><div><span class="result-num">3×</span><span class="result-unit"></span></div><div class="result-label">Average ROI on consulting investment over 12 months</div></div>
+        <div class="result-card"><div><span class="result-num">6</span><span class="result-unit">wk</span></div><div class="result-label">Average time to the first quantifiable result</div></div>
       </div>
       <p class="results-note">Results based on reference projects. Individual results vary by industry, data maturity, and starting point.</p>
     </div>
-
-    <!-- Mid-page CTA -->
     <div class="text-center mt-8">
       <a href="#final-cta" class="btn-primary" data-lang-inline="es">Quiero conocer el potencial de mi empresa</a>
       <a href="#final-cta" class="btn-primary" data-lang-inline="en">I want to assess my company's potential</a>
     </div>
-
   </div>
 </section>
 
-<!-- ════════════════════════════════
-     DIFFERENTIATORS
-════════════════════════════════ -->
 <section id="diff">
   <div class="container">
-
-    <!-- ES -->
     <div data-lang="es" class="fade-in">
       <span class="section-label">Por qué PriceIQ</span>
       <h2 class="section-title">El enfoque que convierte <em>análisis en resultados</em></h2>
       <p class="section-body">No somos una consultora genérica. Somos especialistas en la intersección entre economía de la demanda, ciencia de datos y estrategia comercial.</p>
       <div class="diff-grid">
-        <div class="diff-item">
-          <div class="diff-icon-wrap">🔬</div>
-          <div class="diff-text">
-            <h3>Rigor econométrico</h3>
-            <p>Usamos modelos econométricos validados para medir elasticidades reales, no supuestos. Cada recomendación tiene sustento estadístico.</p>
-          </div>
-        </div>
-        <div class="diff-item">
-          <div class="diff-icon-wrap">🤖</div>
-          <div class="diff-text">
-            <h3>Machine Learning aplicado</h3>
-            <p>Aplicamos algoritmos de ML para detectar patrones de demanda, predecir comportamiento de compra y automatizar ajustes de precio en tiempo real.</p>
-          </div>
-        </div>
-        <div class="diff-item">
-          <div class="diff-icon-wrap">💡</div>
-          <div class="diff-text">
-            <h3>Traducción a impacto de negocio</h3>
-            <p>No entregamos modelos académicos. Cada análisis se traduce en recomendaciones accionables con impacto esperado en el P&L.</p>
-          </div>
-        </div>
-        <div class="diff-item">
-          <div class="diff-icon-wrap">⚡</div>
-          <div class="diff-text">
-            <h3>Implementación rápida</h3>
-            <p>Diseñamos para velocidad. En 6 semanas tenemos los primeros resultados medibles. No proyectos de 18 meses sin retorno visible.</p>
-          </div>
-        </div>
+        <div class="diff-item"><div class="diff-icon-wrap">🔬</div><div class="diff-text"><h3>Rigor econométrico</h3><p>Usamos modelos econométricos validados para medir elasticidades reales, no supuestos. Cada recomendación tiene sustento estadístico.</p></div></div>
+        <div class="diff-item"><div class="diff-icon-wrap">🤖</div><div class="diff-text"><h3>Machine Learning aplicado</h3><p>Aplicamos algoritmos de ML para detectar patrones de demanda, predecir comportamiento de compra y automatizar ajustes de precio en tiempo real.</p></div></div>
+        <div class="diff-item"><div class="diff-icon-wrap">💡</div><div class="diff-text"><h3>Traducción a impacto de negocio</h3><p>No entregamos modelos académicos. Cada análisis se traduce en recomendaciones accionables con impacto esperado en el P&amp;L.</p></div></div>
+        <div class="diff-item"><div class="diff-icon-wrap">⚡</div><div class="diff-text"><h3>Implementación rápida</h3><p>Diseñamos para velocidad. En 6 semanas tenemos los primeros resultados medibles. No proyectos de 18 meses sin retorno visible.</p></div></div>
       </div>
     </div>
-
-    <!-- EN -->
     <div data-lang="en" class="fade-in">
       <span class="section-label">Why PriceIQ</span>
       <h2 class="section-title">The approach that turns <em>analysis into results</em></h2>
       <p class="section-body">We're not a generic consultancy. We are specialists at the intersection of demand economics, data science, and commercial strategy.</p>
       <div class="diff-grid">
-        <div class="diff-item">
-          <div class="diff-icon-wrap">🔬</div>
-          <div class="diff-text">
-            <h3>Econometric rigor</h3>
-            <p>We use validated econometric models to measure real elasticities, not assumptions. Every recommendation has statistical backing.</p>
-          </div>
-        </div>
-        <div class="diff-item">
-          <div class="diff-icon-wrap">🤖</div>
-          <div class="diff-text">
-            <h3>Applied Machine Learning</h3>
-            <p>We apply ML algorithms to detect demand patterns, predict purchase behavior, and automate real-time price adjustments.</p>
-          </div>
-        </div>
-        <div class="diff-item">
-          <div class="diff-icon-wrap">💡</div>
-          <div class="diff-text">
-            <h3>Translated to business impact</h3>
-            <p>We don't deliver academic models. Every analysis translates into actionable recommendations with expected P&L impact.</p>
-          </div>
-        </div>
-        <div class="diff-item">
-          <div class="diff-icon-wrap">⚡</div>
-          <div class="diff-text">
-            <h3>Fast implementation</h3>
-            <p>We design for speed. In 6 weeks we have the first measurable results — not 18-month projects with no visible return.</p>
-          </div>
-        </div>
+        <div class="diff-item"><div class="diff-icon-wrap">🔬</div><div class="diff-text"><h3>Econometric rigor</h3><p>We use validated econometric models to measure real elasticities, not assumptions. Every recommendation has statistical backing.</p></div></div>
+        <div class="diff-item"><div class="diff-icon-wrap">🤖</div><div class="diff-text"><h3>Applied Machine Learning</h3><p>We apply ML algorithms to detect demand patterns, predict purchase behavior, and automate real-time price adjustments.</p></div></div>
+        <div class="diff-item"><div class="diff-icon-wrap">💡</div><div class="diff-text"><h3>Translated to business impact</h3><p>We don't deliver academic models. Every analysis translates into actionable recommendations with expected P&amp;L impact.</p></div></div>
+        <div class="diff-item"><div class="diff-icon-wrap">⚡</div><div class="diff-text"><h3>Fast implementation</h3><p>We design for speed. In 6 weeks we have the first measurable results — not 18-month projects with no visible return.</p></div></div>
       </div>
     </div>
-
   </div>
 </section>
 
-<!-- ════════════════════════════════
-     CASE STUDY
-════════════════════════════════ -->
 <section id="case">
   <div class="container">
-
-    <!-- ES -->
     <div data-lang="es" class="fade-in">
       <span class="section-label">Caso de referencia</span>
       <h2 class="section-title">De precios estáticos a <em>revenue dinámico</em></h2>
       <div class="case-card mt-8">
-        <div class="case-col">
-          <span class="case-step">01 — Problema</span>
-          <h3>E-commerce de consumo masivo con márgenes en caída</h3>
-          <p>Una empresa de comercio electrónico con más de 3.000 SKUs fijaba precios manualmente, basándose en el costo más un margen fijo. Sin segmentación de clientes ni análisis de elasticidad, las promociones erosionaban el margen sin incrementar el volumen necesario para compensar.</p>
-        </div>
-        <div class="case-col">
-          <span class="case-step">02 — Solución</span>
-          <h3>Modelos de elasticidad por segmento + dynamic pricing</h3>
-          <p>Construimos curvas de demanda específicas por categoría y segmento de cliente. Implementamos un motor de dynamic pricing que ajusta precios en tiempo real según inventario, demanda esperada y elasticidad del segmento. Diseñamos una nueva estructura de descuentos por volumen.</p>
-        </div>
-        <div class="case-col">
-          <span class="case-step">03 — Resultado</span>
-          <h3>Resultado en 90 días</h3>
-          <div class="case-result-num">+19%</div>
-          <p>Incremento en ingresos totales en 90 días. Margen bruto mejoró en 11 puntos porcentuales. Se eliminaron el 40% de las promociones de bajo ROI sin impacto en el volumen de ventas total.</p>
-        </div>
+        <div class="case-col"><span class="case-step">01 — Problema</span><h3>E-commerce de consumo masivo con márgenes en caída</h3><p>Una empresa de comercio electrónico con más de 3.000 SKUs fijaba precios manualmente, basándose en el costo más un margen fijo. Sin segmentación de clientes ni análisis de elasticidad, las promociones erosionaban el margen sin incrementar el volumen necesario para compensar.</p></div>
+        <div class="case-col"><span class="case-step">02 — Solución</span><h3>Modelos de elasticidad por segmento + dynamic pricing</h3><p>Construimos curvas de demanda específicas por categoría y segmento de cliente. Implementamos un motor de dynamic pricing que ajusta precios en tiempo real según inventario, demanda esperada y elasticidad del segmento. Diseñamos una nueva estructura de descuentos por volumen.</p></div>
+        <div class="case-col"><span class="case-step">03 — Resultado</span><h3>Resultado en 90 días</h3><div class="case-result-num">+19%</div><p>Incremento en ingresos totales en 90 días. Margen bruto mejoró en 11 puntos porcentuales. Se eliminaron el 40% de las promociones de bajo ROI sin impacto en el volumen de ventas total.</p></div>
       </div>
     </div>
-
-    <!-- EN -->
     <div data-lang="en" class="fade-in">
       <span class="section-label">Reference case</span>
       <h2 class="section-title">From static pricing to <em>dynamic revenue</em></h2>
       <div class="case-card mt-8">
-        <div class="case-col">
-          <span class="case-step">01 — Problem</span>
-          <h3>Mass-market e-commerce with falling margins</h3>
-          <p>An e-commerce company with over 3,000 SKUs was manually setting prices based on cost-plus a fixed margin. Without customer segmentation or elasticity analysis, promotions eroded margins without increasing the volume needed to compensate.</p>
-        </div>
-        <div class="case-col">
-          <span class="case-step">02 — Solution</span>
-          <h3>Segment-level elasticity models + dynamic pricing</h3>
-          <p>We built category and customer segment-specific demand curves. We implemented a dynamic pricing engine that adjusts prices in real time based on inventory, expected demand, and segment elasticity. We redesigned the volume discount structure.</p>
-        </div>
-        <div class="case-col">
-          <span class="case-step">03 — Result</span>
-          <h3>Result in 90 days</h3>
-          <div class="case-result-num">+19%</div>
-          <p>Total revenue increase in 90 days. Gross margin improved by 11 percentage points. 40% of low-ROI promotions were eliminated with no impact on total sales volume.</p>
-        </div>
+        <div class="case-col"><span class="case-step">01 — Problem</span><h3>Mass-market e-commerce with falling margins</h3><p>An e-commerce company with over 3,000 SKUs was manually setting prices based on cost-plus a fixed margin. Without customer segmentation or elasticity analysis, promotions eroded margins without increasing the volume needed to compensate.</p></div>
+        <div class="case-col"><span class="case-step">02 — Solution</span><h3>Segment-level elasticity models + dynamic pricing</h3><p>We built category and customer segment-specific demand curves. We implemented a dynamic pricing engine that adjusts prices in real time based on inventory, expected demand, and segment elasticity. We redesigned the volume discount structure.</p></div>
+        <div class="case-col"><span class="case-step">03 — Result</span><h3>Result in 90 days</h3><div class="case-result-num">+19%</div><p>Total revenue increase in 90 days. Gross margin improved by 11 percentage points. 40% of low-ROI promotions were eliminated with no impact on total sales volume.</p></div>
       </div>
     </div>
-
   </div>
 </section>
 
-<!-- ════════════════════════════════
-     FAQ
-════════════════════════════════ -->
 <section id="faq">
   <div class="container">
-
-    <!-- ES -->
     <div data-lang="es" class="fade-in">
       <div class="faq-layout">
         <div>
@@ -1396,46 +441,14 @@
           <p class="section-body" style="margin-top:.75rem">Todo lo que necesitas saber sobre optimización de precios e ingresos.</p>
         </div>
         <div class="faq-list">
-          <details class="faq-item">
-            <summary class="faq-question">
-              ¿Qué es la optimización de precios?
-              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-            </summary>
-            <p class="faq-answer">La optimización de precios es el proceso de determinar el precio que maximiza un objetivo comercial (ingresos, margen o participación de mercado) para un producto o servicio dado, tomando en cuenta la disposición a pagar de los clientes, la elasticidad de la demanda y el contexto competitivo.</p>
-          </details>
-          <details class="faq-item">
-            <summary class="faq-question">
-              ¿Qué es la optimización de ingresos?
-              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-            </summary>
-            <p class="faq-answer">La optimización de ingresos es una disciplina más amplia que abarca la gestión de precios, la segmentación de demanda, el mix de productos y la estrategia de canales para maximizar el ingreso total de una empresa. Considera el precio óptimo para cada segmento de cliente en cada punto del ciclo de compra.</p>
-          </details>
-          <details class="faq-item">
-            <summary class="faq-question">
-              ¿Cómo mejora el pricing los ingresos de una empresa?
-              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-            </summary>
-            <p class="faq-answer">El pricing mejora los ingresos de dos formas: (1) capturando mayor valor por cada unidad vendida, subiendo precios donde la elasticidad lo permite; (2) incrementando el volumen en segmentos donde el precio actual es demasiado alto y la elasticidad es elevada. Un modelo de optimización identifica exactamente cuál de las dos palancas aplicar en cada caso.</p>
-          </details>
-          <details class="faq-item">
-            <summary class="faq-question">
-              ¿Qué es la elasticidad precio-demanda?
-              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-            </summary>
-            <p class="faq-answer">La elasticidad precio-demanda mide en qué porcentaje cambia la cantidad demandada de un bien ante un cambio del 1% en su precio. Si la elasticidad es –2, un aumento del 1% en el precio reduce la demanda en un 2%. Conocer la elasticidad permite predecir el impacto en ingresos de cualquier cambio de precio.</p>
-          </details>
-          <details class="faq-item">
-            <summary class="faq-question">
-              ¿Cómo optimizan el pricing las empresas líderes?
-              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-            </summary>
-            <p class="faq-answer">Las empresas líderes optimizan su pricing combinando modelos econométricos de demanda, segmentación de clientes, experimentación de precios (A/B testing) y, en muchos casos, algoritmos de dynamic pricing. El proceso es iterativo: se mide, se modela, se ajusta y se vuelve a medir.</p>
-          </details>
+          <details class="faq-item"><summary class="faq-question">¿Qué es la optimización de precios?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></summary><p class="faq-answer">La optimización de precios es el proceso de determinar el precio que maximiza un objetivo comercial (ingresos, margen o participación de mercado) para un producto o servicio dado, tomando en cuenta la disposición a pagar de los clientes, la elasticidad de la demanda y el contexto competitivo.</p></details>
+          <details class="faq-item"><summary class="faq-question">¿Qué es la optimización de ingresos?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></summary><p class="faq-answer">La optimización de ingresos es una disciplina más amplia que abarca la gestión de precios, la segmentación de demanda, el mix de productos y la estrategia de canales para maximizar el ingreso total de una empresa. Considera el precio óptimo para cada segmento de cliente en cada punto del ciclo de compra.</p></details>
+          <details class="faq-item"><summary class="faq-question">¿Cómo mejora el pricing los ingresos de una empresa?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></summary><p class="faq-answer">El pricing mejora los ingresos de dos formas: (1) capturando mayor valor por cada unidad vendida, subiendo precios donde la elasticidad lo permite; (2) incrementando el volumen en segmentos donde el precio actual es demasiado alto y la elasticidad es elevada. Un modelo de optimización identifica exactamente cuál de las dos palancas aplicar en cada caso.</p></details>
+          <details class="faq-item"><summary class="faq-question">¿Qué es la elasticidad precio-demanda?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></summary><p class="faq-answer">La elasticidad precio-demanda mide en qué porcentaje cambia la cantidad demandada de un bien ante un cambio del 1% en su precio. Si la elasticidad es –2, un aumento del 1% en el precio reduce la demanda en un 2%. Conocer la elasticidad permite predecir el impacto en ingresos de cualquier cambio de precio.</p></details>
+          <details class="faq-item"><summary class="faq-question">¿Cómo optimizan el pricing las empresas líderes?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></summary><p class="faq-answer">Las empresas líderes optimizan su pricing combinando modelos econométricos de demanda, segmentación de clientes, experimentación de precios (A/B testing) y, en muchos casos, algoritmos de dynamic pricing. El proceso es iterativo: se mide, se modela, se ajusta y se vuelve a medir.</p></details>
         </div>
       </div>
     </div>
-
-    <!-- EN -->
     <div data-lang="en" class="fade-in">
       <div class="faq-layout">
         <div>
@@ -1444,84 +457,42 @@
           <p class="section-body" style="margin-top:.75rem">Everything you need to know about pricing and revenue optimization.</p>
         </div>
         <div class="faq-list">
-          <details class="faq-item">
-            <summary class="faq-question">
-              What is pricing optimization?
-              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-            </summary>
-            <p class="faq-answer">Pricing optimization is the process of determining the price that maximizes a business objective (revenue, margin, or market share) for a given product or service, taking into account customer willingness to pay, demand elasticity, and the competitive context.</p>
-          </details>
-          <details class="faq-item">
-            <summary class="faq-question">
-              What is revenue optimization?
-              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-            </summary>
-            <p class="faq-answer">Revenue optimization is a broader discipline encompassing price management, demand segmentation, product mix, and channel strategy to maximize a company's total revenue. It considers the optimal price for each customer segment at each point in the buying cycle.</p>
-          </details>
-          <details class="faq-item">
-            <summary class="faq-question">
-              How does pricing improve a company's revenue?
-              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-            </summary>
-            <p class="faq-answer">Pricing improves revenue in two ways: (1) capturing more value per unit sold by raising prices where elasticity allows; (2) increasing volume in segments where the current price is too high and elasticity is elevated. An optimization model identifies exactly which lever to apply in each case.</p>
-          </details>
-          <details class="faq-item">
-            <summary class="faq-question">
-              What is price elasticity of demand?
-              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-            </summary>
-            <p class="faq-answer">Price elasticity of demand measures by what percentage the quantity demanded of a good changes when its price changes by 1%. If elasticity is –2, a 1% price increase reduces demand by 2%. Knowing elasticity allows you to predict the revenue impact of any price change.</p>
-          </details>
-          <details class="faq-item">
-            <summary class="faq-question">
-              How do leading companies optimize pricing?
-              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-            </summary>
-            <p class="faq-answer">Leading companies optimize their pricing by combining econometric demand models, customer segmentation, pricing experimentation (A/B testing), and, in many cases, dynamic pricing algorithms. The process is iterative: measure, model, adjust, and measure again.</p>
-          </details>
+          <details class="faq-item"><summary class="faq-question">What is pricing optimization?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></summary><p class="faq-answer">Pricing optimization is the process of determining the price that maximizes a business objective (revenue, margin, or market share) for a given product or service, taking into account customer willingness to pay, demand elasticity, and the competitive context.</p></details>
+          <details class="faq-item"><summary class="faq-question">What is revenue optimization?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></summary><p class="faq-answer">Revenue optimization is a broader discipline encompassing price management, demand segmentation, product mix, and channel strategy to maximize a company's total revenue. It considers the optimal price for each customer segment at each point in the buying cycle.</p></details>
+          <details class="faq-item"><summary class="faq-question">How does pricing improve a company's revenue?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></summary><p class="faq-answer">Pricing improves revenue in two ways: (1) capturing more value per unit sold by raising prices where elasticity allows; (2) increasing volume in segments where the current price is too high and elasticity is elevated. An optimization model identifies exactly which lever to apply in each case.</p></details>
+          <details class="faq-item"><summary class="faq-question">What is price elasticity of demand?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></summary><p class="faq-answer">Price elasticity of demand measures by what percentage the quantity demanded of a good changes when its price changes by 1%. If elasticity is –2, a 1% price increase reduces demand by 2%. Knowing elasticity allows you to predict the revenue impact of any price change.</p></details>
+          <details class="faq-item"><summary class="faq-question">How do leading companies optimize pricing?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></summary><p class="faq-answer">Leading companies optimize their pricing by combining econometric demand models, customer segmentation, pricing experimentation (A/B testing), and, in many cases, dynamic pricing algorithms. The process is iterative: measure, model, adjust, and measure again.</p></details>
         </div>
       </div>
     </div>
-
   </div>
 </section>
 
-<!-- ════════════════════════════════
-     FINAL CTA
-════════════════════════════════ -->
 <section id="final-cta">
   <div class="container" style="position:relative;z-index:1">
-
-    <!-- ES -->
     <div data-lang="es" class="fade-in">
       <span class="section-label">Empieza hoy</span>
       <h2 class="section-title">¿Cuánto ingreso está dejando de capturar tu empresa?</h2>
       <p class="cta-sub">Reserva una sesión diagnóstica gratuita de 45 minutos. Sin compromiso. Te mostraremos dónde están tus oportunidades de pricing y una estimación del potencial de ingresos adicionales.</p>
       <div class="cta-actions">
-        <a href="mailto:priceiqconsulting@gmail.com?subject=Diagnóstico de precios gratuito" class="btn-primary">Reservar diagnóstico gratuito</a>
-        <a href="mailto:priceiqconsulting@gmail.com" class="btn-ghost">Contactar por email</a>
+        <a href="https://mail.google.com/mail/?view=cm&to=priceiqconsulting@gmail.com&su=Diagnostico+de+precios+gratuito" target="_blank" rel="noopener" class="btn-primary">Reservar diagnóstico gratuito</a>
+        <a href="https://mail.google.com/mail/?view=cm&to=priceiqconsulting@gmail.com" target="_blank" rel="noopener" class="btn-ghost">Contactar por email</a>
       </div>
       <p class="cta-note">Sin formularios largos. Sin compromisos. Solo una conversación con un experto.</p>
     </div>
-
-    <!-- EN -->
     <div data-lang="en" class="fade-in">
       <span class="section-label">Start today</span>
       <h2 class="section-title">How much revenue is your company failing to capture?</h2>
       <p class="cta-sub">Book a free 45-minute diagnostic session. No commitment. We'll show you where your pricing opportunities are and an estimate of the additional revenue potential.</p>
       <div class="cta-actions">
-        <a href="mailto:priceiqconsulting@gmail.com?subject=Free pricing diagnostic" class="btn-primary">Book a free diagnostic</a>
-        <a href="mailto:priceiqconsulting@gmail.com" class="btn-ghost">Contact by email</a>
+        <a href="https://mail.google.com/mail/?view=cm&to=priceiqconsulting@gmail.com&su=Free+pricing+diagnostic" target="_blank" rel="noopener" class="btn-primary">Book a free diagnostic</a>
+        <a href="https://mail.google.com/mail/?view=cm&to=priceiqconsulting@gmail.com" target="_blank" rel="noopener" class="btn-ghost">Contact by email</a>
       </div>
       <p class="cta-note">No long forms. No commitments. Just a conversation with an expert.</p>
     </div>
-
   </div>
 </section>
 
-<!-- ════════════════════════════════
-     FOOTER
-════════════════════════════════ -->
 <footer>
   <div class="footer-brand">Price<span>IQ</span> Consulting</div>
   <div class="footer-copy">
@@ -1531,39 +502,23 @@
 </footer>
 
 <script>
-  // ── Language switcher ──
   function setLang(lang) {
     document.body.className = 'lang-' + lang;
     document.documentElement.lang = lang;
     document.getElementById('btn-es').classList.toggle('active', lang === 'es');
     document.getElementById('btn-en').classList.toggle('active', lang === 'en');
   }
-
-  // ── Mobile nav ──
   function toggleMobileNav() {
     document.getElementById('mobile-nav').classList.toggle('open');
   }
-
-  // ── Scroll animations ──
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-        observer.unobserve(e.target);
-      }
-    });
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
   }, { threshold: 0.1 });
-
   document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-
-  // ── Smooth scroll for nav links ──
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', e => {
       const target = document.querySelector(a.getAttribute('href'));
-      if (target) {
-        e.preventDefault();
-        target.scrollIntoView({ behavior: 'smooth' });
-      }
+      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
     });
   });
 </script>
